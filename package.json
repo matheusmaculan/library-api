@@ -7,7 +7,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "test": "jest --force-exit ",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node server.ts' -e ts",
+    "dev": "nodemon server.ts",
     "start": "yarn build && node dist/index.js"
   },
   "keywords": [],
