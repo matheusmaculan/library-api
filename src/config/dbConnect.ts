@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 mongoose.connect(
-  "mongodb+srv://m_maculan:maculan175@apilivros.lag18hx.mongodb.net/?retryWrites=true&w=majority"
+  "mongodb+srv://m_maculan:maculan175@apilivros.lag18hx.mongodb.net/api_livros"
 );
 const db = mongoose.connection;
 
