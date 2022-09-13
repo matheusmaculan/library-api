@@ -2,9 +2,12 @@ import { livros } from "../models/Livro";
 
 export class livroController {
   static listarLivros = (req: any, res: any) => {
-    livros.find((err, livros) => {
-      res.status(200).json(livros);
-    });
+    livros
+      .find()
+      .populate("autor")
+      .exec((err, livros) => {
+        res.status(200).json(livros);
+      });
   };
 
   static listarLivroPorId = (req: any, res: any) => {
