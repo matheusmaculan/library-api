@@ -13,15 +13,18 @@ export class livroController {
   static listarLivroPorId = (req: any, res: any) => {
     const id = req.params.id;
 
-    livros.findById(id, (err: any, livros: any) => {
-      if (err) {
-        res
-          .status(400)
-          .send({ message: `${err.message} - Id do livro não localizado.` });
-      } else {
-        res.status(200).send(livros);
-      }
-    });
+    livros
+      .findById(id)
+      .populate("autor", "nome")
+      .exec((err: any, livros: any) => {
+        if (err) {
+          res
+            .status(400)
+            .send({ message: `${err.message} - Id do livro não localizado.` });
+        } else {
+          res.status(200).send(livros);
+        }
+      });
   };
 
   static cadastrarLivro = (req: any, res: any) => {
@@ -54,6 +57,20 @@ export class livroController {
         res.status(200).send({ message: "Livro removido com sucesso" });
       } else {
         res.status(500).send({ message: err.message });
+      }
+    });
+  };
+
+  static listarLivrosPorEditora = (req: any, res: any) => {
+    const editora = req.query.editora;
+
+    livros.find({ editora: editora }, {}, (err: any, livros: any) => {
+      if (err) {
+        res
+          .status(400)
+          .send({ message: `${err.message} - Id da editora não localizado.` });
+      } else {
+        res.status(200).send(livros);
       }
     });
   };
